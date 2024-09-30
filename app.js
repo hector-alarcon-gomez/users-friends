@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const userRoutes = require('./routes/user');
 const connectDB = require('./db/db');
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // db connection
 connectDB();
@@ -13,7 +13,7 @@ const app = express();
 app.use(bodyParser.json());
 
 // endpoints
-app.use('/users', userRoutes);
+app.use('/api/v1/users', userRoutes);
 
 // error handler
 app.use((error, req, res, next) => {

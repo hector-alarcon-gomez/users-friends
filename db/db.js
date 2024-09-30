@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { up, down } = require('../data/seed');
+const { up, down } = require('./../data/seed');
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
