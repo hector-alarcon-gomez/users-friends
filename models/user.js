@@ -21,4 +21,16 @@ const userSchema = mongoose.Schema(
   { timestamps: true }
 );
 
+userSchema.methods.updateFriend = async function (friendId) {
+  if (this.friends.includes(friendId)) return false;
+  this.friends.push(friendId);
+  await this.save();
+  const result = await this.model('User').findByIdAndUpdate(
+    friendId,
+    { $push: { friends: this._id } },
+    { new: true }
+  );
+  return result;
+};
+
 module.exports = mongoose.model('User', userSchema);

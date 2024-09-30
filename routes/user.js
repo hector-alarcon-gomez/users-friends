@@ -20,4 +20,6 @@ router.patch('/:id', userValidations, userController.patchUser);
 
 router.delete('/:id', userController.deleteUser);
 
+router.get('/:id/relationship/:friendId', userController.getUserRelationship);
+
 module.exports = router;

@@ -1,5 +1,7 @@
 const User = require('../models/user');
 
+const { updateFriends } = require('./../controllers/users');
+
 const up = async () => {
   const user1 = new User({
     name: 'John',
@@ -18,16 +20,14 @@ const up = async () => {
     friends: [],
   });
 
-  user1.friends.push(user2._id);
-  user2.friends.push(user1._id);
-
-  user3.friends.push(user2._id);
-  user2.friends.push(user3._id);
-
   await user1.save();
   await user2.save();
   await user3.save();
   await user4.save();
+
+  await updateFriends(user1, [user2._id]);
+  await updateFriends(user2, [user3._id]);
+  await updateFriends(user3, [user4._id]);
 
   console.log(`DB seeded`);
 };
